@@ -1,4 +1,4 @@
-import { Button, CardMedia, Container, Divider } from "@mui/material";
+import { Button, CardMedia, Container } from "@mui/material";
 import React from "react";
 import SwiperCore, { Pagination } from "swiper";
 
@@ -23,7 +23,6 @@ const Comments = () => {
 				component='div'
 				gutterBottom>
 				Reviews
-				<Divider className='hr' />
 			</Typography>
 			<Swiper
 				loop={true}

@@ -4,7 +4,6 @@ import {
 	CardContent,
 	CardMedia,
 	Container,
-	Divider,
 	Grid,
 	Typography,
 } from "@mui/material";
@@ -24,7 +23,6 @@ const AllBooks = () => {
 					component='div'
 					gutterBottom>
 					All Books
-					<Divider className='hr' />
 				</Typography>
 				<Grid
 					justifyContent='space-between'

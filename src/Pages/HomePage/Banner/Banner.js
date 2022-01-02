@@ -37,7 +37,7 @@ const Banner = () => {
 						style={{ textDecoration: "none", color: "black" }}
 						sx={{ my: 1 }}
 						exact
-						to='/'>
+						to='/aboutus'>
 						<Button
 							variant='contained'
 							sx={{

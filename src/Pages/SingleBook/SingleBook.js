@@ -1,10 +1,17 @@
 import {
+	Avatar,
 	Box,
 	Button,
 	CardContent,
 	CardMedia,
 	Container,
+	Divider,
 	Grid,
+	List,
+	ListItem,
+	ListItemAvatar,
+	ListItemText,
+	Paper,
 	Rating,
 	TextField,
 	Typography,
@@ -17,22 +24,20 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import RateReviewIcon from "@mui/icons-material/RateReview";
+import StarIcon from "@mui/icons-material/Star";
 
 const SingleBook = () => {
 	const [value, setValue] = React.useState(0);
-	const { handleSubmit, register } = useForm();
+	const { handleSubmit, register, reset } = useForm();
 	const onSubmit = (data) => {
 		console.log(data);
+		reset();
 	};
 	return (
 		<>
 			<Header />
 			<Container sx={{ py: 5 }}>
-				<Grid
-					justifyContent='space-between'
-					alignItems='center'
-					container
-					spacing={2}>
+				<Grid justifyContent='space-between' container spacing={2}>
 					<Grid item md={4} xs={12}>
 						<CardMedia
 							style={{
@@ -164,6 +169,47 @@ const SingleBook = () => {
 								</form>
 							</AccordionDetails>
 						</Accordion>
+						<Paper elevation={3} sx={{ mt: 5 }}>
+							<Typography variant='h4' sx={{ fontWeight: "bold", pt: 1 }}>
+								Community Reviews
+							</Typography>
+							<List
+								sx={{
+									width: "100%",
+									bgcolor: "background.paper",
+								}}>
+								{Array.from({ length: 5 }).map((_, idx) => (
+									<>
+										<ListItem alignItems='flex-start'>
+											<ListItemAvatar>
+												<Avatar
+													alt='Remy Sharp'
+													src='/static/images/avatar/1.jpg'
+												/>
+											</ListItemAvatar>
+											<ListItemText
+												primary='John Doe'
+												secondary={
+													<React.Fragment>
+														<Typography
+															sx={{ display: "inline" }}
+															component='span'
+															variant='body2'
+															color='text.primary'>
+															5 <StarIcon fontSize='5px' />
+														</Typography>
+														{
+															" — I'll be in your neighborhood doing errands this…"
+														}
+													</React.Fragment>
+												}
+											/>
+										</ListItem>
+										<Divider variant='inset' component='li' />
+									</>
+								))}
+							</List>
+						</Paper>
 					</Grid>
 				</Grid>
 			</Container>
