@@ -28,8 +28,11 @@ import useAuth from "../../../context/useAuth";
 
 const Profile = () => {
 	const { user } = useAuth();
+	const [open, setOpen] = React.useState(false);
+	const handleOpen = () => setOpen(true);
+	const handleClose = () => setOpen(false);
 	const [imageLink, setImageLink] = useState(null);
-
+	const [submitting, setSubmitting] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const uploadImage = async (e) => {
 		const files = e.target.files;
@@ -59,10 +62,13 @@ const Profile = () => {
 		},
 	});
 	const onSubmit = (data) => {
+		setSubmitting(true);
 		axios
 			.put(`${process.env.REACT_APP_SERVER_API}/users/updateUsers`, data)
 			.then(function (response) {
 				Swal.fire("Success!", "Profile Updated Successfully.", "success");
+				setSubmitting(false);
+				setOpen(false);
 			})
 			.catch(function (error) {
 				console.log(error);
@@ -80,9 +86,6 @@ const Profile = () => {
 				setSingleUser(data);
 			});
 	}, [reset, user?.email, user?.photoURL]);
-	const [open, setOpen] = React.useState(false);
-	const handleOpen = () => setOpen(true);
-	const handleClose = () => setOpen(false);
 
 	const style = {
 		position: "absolute",
@@ -121,7 +124,7 @@ const Profile = () => {
 								borderRadius: "50%",
 								border: "1px solid",
 							}}
-							image={singleUser?.photoURL}
+							image={singleUser?.photoURL || user?.photoURL}
 							alt=''
 						/>
 
@@ -129,13 +132,13 @@ const Profile = () => {
 							variant='h5'
 							component='div'
 							sx={{ fontWeight: "bold", mt: 2, color: "#31887D" }}>
-							{singleUser?.displayName}
+							{singleUser?.displayName || user?.displayName}
 						</Typography>
 						<Typography
 							variant='body'
 							component='div'
 							sx={{ fontWeight: "bold", mt: 2, color: "#31887D" }}>
-							{singleUser?.title}
+							{singleUser?.title || "Add Title"}
 						</Typography>
 						<List>
 							<ListItem sx={{ pt: 0 }}>
@@ -144,7 +147,7 @@ const Profile = () => {
 								</ListItemIcon>
 								<ListItemText
 									sx={{ color: "#31887D" }}
-									primary={singleUser?.email}
+									primary={singleUser?.email || user?.email}
 								/>
 							</ListItem>
 						</List>
@@ -152,7 +155,7 @@ const Profile = () => {
 							variant='subtitle'
 							component='div'
 							sx={{ color: "#31887D" }}>
-							{singleUser?.details}
+							{singleUser?.details || "Add Details"}
 						</Typography>
 					</Card>
 					<Button
@@ -280,6 +283,14 @@ const Profile = () => {
 					</Box>
 				</Fade>
 			</Modal>
+			<Backdrop
+				sx={{
+					color: "#fff",
+					zIndex: (theme) => theme.zIndex.drawer + 1,
+				}}
+				open={submitting}>
+				<CircularProgress color='inherit' />
+			</Backdrop>
 		</Container>
 	);
 };

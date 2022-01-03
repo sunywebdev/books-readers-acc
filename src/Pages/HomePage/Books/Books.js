@@ -8,10 +8,17 @@ import {
 	Grid,
 	Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Books = () => {
+	const [books, setBooks] = useState([]);
+	useEffect(() => {
+		fetch(`${process.env.REACT_APP_SERVER_API}/books`)
+			.then((res) => res.json())
+			.then((data) => setBooks(data));
+	}, []);
+
 	return (
 		<Container sx={{ pt: 5 }}>
 			<Typography
@@ -27,9 +34,9 @@ const Books = () => {
 				alignItems='center'
 				container
 				spacing={2}>
-				{Array.from({ length: 6 }).map((_, idx) => (
+				{books.map((book) => (
 					<Grid item md={4} xs={12}>
-						<Link to='/singlebook' style={{ textDecoration: "none" }}>
+						<Link to={`/book/${book?._id}`} style={{ textDecoration: "none" }}>
 							<Card sx={{ border: 0, boxShadow: 0 }}>
 								<CardActionArea sx={{ display: "flex" }}>
 									<CardMedia
@@ -39,25 +46,22 @@ const Books = () => {
 											margin: "0 auto",
 										}}
 										component='img'
-										image='https://covers.openlibrary.org/w/id/8303392-M.jpg'
+										image={book?.imageLink}
 										alt=''
 									/>
 									<CardContent sx={{ textAlign: "left" }}>
 										<Typography gutterBottom variant='h6' component='div'>
-											Harry Potter and the Goblet of Fire
+											{book?.bookName}
 										</Typography>
 										<Typography
 											gutterBottom
 											variant='body2'
 											component='div'
 											sx={{ fontWeight: "bold", mb: 1 }}>
-											By Xulon Press
+											By {book?.publishedBy}
 										</Typography>
 										<Typography variant='body2' color='text.secondary'>
-											Harry Potter is midway through his training as a wizard
-											and his coming of age. Harry wants to get away from the
-											pernicious Dursleys and go to the International Quidditch
-											Cup.
+											{book?.details.slice(0, 200)}....
 										</Typography>
 									</CardContent>
 								</CardActionArea>

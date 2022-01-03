@@ -1,9 +1,11 @@
 import {
 	Avatar,
+	Backdrop,
 	Box,
 	Button,
 	CardContent,
 	CardMedia,
+	CircularProgress,
 	Container,
 	Divider,
 	Grid,
@@ -16,7 +18,7 @@ import {
 	TextField,
 	Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "../../Shared/Footer/Footer";
 import Header from "../../Shared/Header/Header";
 import { useForm } from "react-hook-form";
@@ -25,14 +27,74 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import RateReviewIcon from "@mui/icons-material/RateReview";
 import StarIcon from "@mui/icons-material/Star";
+import { useParams } from "react-router-dom";
+import useAuth from "../../context/useAuth";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const SingleBook = () => {
+	const { user } = useAuth();
 	const [value, setValue] = React.useState(0);
 	const { handleSubmit, register, reset } = useForm();
-	const onSubmit = (data) => {
-		console.log(data);
+	const onSubmit = ({ review, rating }) => {
+		setSubmitting(true);
+		const userReview = {
+			review,
+			rating,
+			bookId: book?.bookId,
+			userPhoto: singleUser?.photoURL,
+			userName: singleUser?.displayName,
+			userEmail: singleUser?.email,
+		};
+		axios
+			.post(`${process.env.REACT_APP_SERVER_API}/reviews`, userReview)
+			.then(function (response) {
+				Swal.fire({
+					icon: "success",
+					title: "Review Added Successfully",
+					showConfirmButton: true,
+					timer: 2500,
+				});
+				setSubmitting(false);
+				reset();
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+		console.log(userReview);
 		reset();
 	};
+
+	const [singleUser, setSingleUser] = useState();
+	useEffect(() => {
+		fetch(
+			`${process.env.REACT_APP_SERVER_API}/singleUsers?email=${user?.email}`,
+		)
+			.then((res) => res.json())
+			.then((data) => {
+				reset(data);
+				setSingleUser(data);
+			});
+	}, [reset, user?.email]);
+	const { id } = useParams();
+	const [reviews, setReviews] = useState([]);
+	useEffect(() => {
+		fetch(`${process.env.REACT_APP_SERVER_API}/reviewss?bookId=${book?.bookId}`)
+			.then((res) => res.json())
+			.then((data) => setReviews(data));
+	});
+	console.log(reviews);
+	const [submitting, setSubmitting] = useState(false);
+	const [book, setBook] = useState();
+	useEffect(() => {
+		fetch(`${process.env.REACT_APP_SERVER_API}/books/${id}`)
+			.then((res) => res.json())
+			.then((data) => {
+				reset(data);
+				setBook(data);
+			});
+	}, [id, reset]);
+
 	return (
 		<>
 			<Header />
@@ -45,9 +107,10 @@ const SingleBook = () => {
 								maxWidth: "300px",
 							}}
 							component='img'
-							image='https://covers.openlibrary.org/w/id/8303392-M.jpg'
+							image={book?.imageLink}
 							alt=''
 						/>
+
 						<Button
 							variant='contained'
 							sx={{
@@ -64,21 +127,22 @@ const SingleBook = () => {
 					<Grid item md={8} xs={12}>
 						<CardContent sx={{ textAlign: "left" }}>
 							<Typography gutterBottom variant='h4' component='div'>
-								Harry Potter and the Goblet of Fire
+								{book?.bookName}
 							</Typography>
 							<Typography
 								gutterBottom
 								variant='body2'
 								component='div'
 								sx={{ mb: 1 }}>
-								Written By <b>Xulon Press</b>
+								Written By <b>{book?.publishedBy}</b>
 							</Typography>
 							<Typography
 								gutterBottom
 								variant='body2'
 								component='div'
 								sx={{ mb: 1 }}>
-								This edition was published in <b>1975</b> in <b>Canada</b>
+								This edition was published in <b>{book?.bookName}</b> in
+								<b>{book?.PublishedIn}</b>
 							</Typography>
 							<Typography
 								gutterBottom
@@ -96,18 +160,7 @@ const SingleBook = () => {
 								</Typography>
 							</Box>
 							<Typography variant='body2' color='text.secondary'>
-								The entire focus of this novel rests on the determined though
-								sometimes woefully mistaken efforts of three British
-								families--the Moseleys, the Jarvises, and the Chattertons--to
-								arrange suitable marriages for their respective sons and
-								daughters. The bulk of the early-nineteenth-century action is
-								therefore played out through dinners, social calls, visits to
-								summer resorts, and development of various designs employed
-								toward the end of matrimony. The "precaution" displayed by Mrs.
-								Wilson in guiding her niece Emily Moseley through the
-								treacherous shoals toward a sound Christian marriage furnishes
-								the novel's title and indicates the author's moral and ethical
-								position.
+								{book?.details}
 							</Typography>
 						</CardContent>
 						<Accordion>
@@ -178,17 +231,14 @@ const SingleBook = () => {
 									width: "100%",
 									bgcolor: "background.paper",
 								}}>
-								{Array.from({ length: 5 }).map((_, idx) => (
+								{reviews.map((review) => (
 									<>
 										<ListItem alignItems='flex-start'>
 											<ListItemAvatar>
-												<Avatar
-													alt='Remy Sharp'
-													src='/static/images/avatar/1.jpg'
-												/>
+												<Avatar alt='' src={review?.userPhoto} />
 											</ListItemAvatar>
 											<ListItemText
-												primary='John Doe'
+												primary={review?.userName}
 												secondary={
 													<React.Fragment>
 														<Typography
@@ -196,11 +246,10 @@ const SingleBook = () => {
 															component='span'
 															variant='body2'
 															color='text.primary'>
-															5 <StarIcon fontSize='5px' />
+															{review?.rating}{" "}
+															<StarIcon fontSize='5px' sx={{ mr: 1 }} />
 														</Typography>
-														{
-															" — I'll be in your neighborhood doing errands this…"
-														}
+														{review?.review}
 													</React.Fragment>
 												}
 											/>
@@ -212,6 +261,14 @@ const SingleBook = () => {
 						</Paper>
 					</Grid>
 				</Grid>
+				<Backdrop
+					sx={{
+						color: "#fff",
+						zIndex: (theme) => theme.zIndex.drawer + 1,
+					}}
+					open={submitting}>
+					<CircularProgress color='inherit' />
+				</Backdrop>
 			</Container>
 			<Footer />
 		</>

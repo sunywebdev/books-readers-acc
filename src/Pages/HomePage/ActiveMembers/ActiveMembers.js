@@ -7,7 +7,7 @@ const ActiveMembers = () => {
 		fetch(`${process.env.REACT_APP_SERVER_API}/users`)
 			.then((res) => res.json())
 			.then((data) => setUsers(data));
-	});
+	}, []);
 	return (
 		<Container sx={{ pt: 5 }}>
 			<Typography
@@ -37,8 +37,8 @@ const ActiveMembers = () => {
 								className='borderColor'
 								style={{
 									borderRadius: "50%",
-									width: "80px",
-									height: "80px",
+									width: "70px",
+									height: "70px",
 									boxShadow: " 4px 24px 34px 1px rgba(0,0,0,0.16)",
 									backgroundColor: "white",
 								}}
@@ -47,7 +47,7 @@ const ActiveMembers = () => {
 							/>
 							<Typography
 								gutterBottom
-								variant='h6'
+								variant='button'
 								component='div'
 								className='textColor'
 								sx={{ mt: 1.5, fontWeight: "bold" }}>

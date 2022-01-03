@@ -15,13 +15,13 @@ import React, { useEffect, useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Swal from "sweetalert2";
 
-const AllUsers = () => {
+const AllBooksList = () => {
 	const [deleted, setDeleted] = useState(false);
-	const [users, setUsers] = useState([]);
+	const [books, setBooks] = useState([]);
 	useEffect(() => {
-		fetch(`${process.env.REACT_APP_SERVER_API}/users`)
+		fetch(`${process.env.REACT_APP_SERVER_API}/books`)
 			.then((res) => res.json())
-			.then((data) => setUsers(data));
+			.then((data) => setBooks(data));
 	}, [deleted]);
 
 	const handleDelete = (id) => {
@@ -36,9 +36,9 @@ const AllUsers = () => {
 		}).then((result) => {
 			if (result.isConfirmed) {
 				axios
-					.delete(`${process.env.REACT_APP_SERVER_API}/users/${id}`)
+					.delete(`${process.env.REACT_APP_SERVER_API}/books/${id}`)
 					.then(function (response) {
-						Swal.fire("Deleted!", "That User has been removed.", "success");
+						Swal.fire("Deleted!", "That book has been removed.", "success");
 						setDeleted(true);
 					})
 					.catch(function (error) {
@@ -47,7 +47,7 @@ const AllUsers = () => {
 			}
 		});
 	};
-
+	console.log(books);
 	let count = 1;
 	return (
 		<Container
@@ -62,7 +62,7 @@ const AllUsers = () => {
 					variant='h4'
 					component='div'
 					gutterBottom>
-					All Users
+					All Books
 				</Typography>
 				<Grid item xs={12} md={12}>
 					<Paper
@@ -81,39 +81,40 @@ const AllUsers = () => {
 										Name
 									</TableCell>
 									<TableCell className='color-theme' align='left'>
-										Email
+										Author
 									</TableCell>
 									<TableCell className='color-theme' align='left'>
 										Action
 									</TableCell>
 								</TableRow>
 							</TableHead>
-							{users?.length > 0 ? (
+							{books?.length > 0 ? (
 								<TableBody sx={{ td: { py: 1 } }}>
-									{users.map((user) => (
+									{books.map((book) => (
 										<TableRow
-											key={user?._id}
+											key={book?._id}
 											sx={{
 												"&:last-child td, &:last-child th": { border: 0 },
 											}}>
 											<TableCell align='left'>{count++}</TableCell>
 											<TableCell>
 												<img
-													src={user?.photoURL || "N/A"}
+													src={book?.imageLink || "N/A"}
 													alt=''
-													width='35px'
-													height='35px'
-													style={{ borderRadius: "50%" }}
+													width='40px'
+													height='55px'
 												/>
 											</TableCell>
 											<TableCell align='left'>
-												{user?.displayName || "N/A"}
+												{book?.bookName || "N/A"}
 											</TableCell>
-											<TableCell align='left'>{user?.email || "N/A"}</TableCell>
+											<TableCell align='left'>
+												{book?.publishedBy || "N/A"}
+											</TableCell>
 											<TableCell align='left'>
 												<Button
 													className='button border'
-													onClick={() => handleDelete(user?._id)}
+													onClick={() => handleDelete(book?._id)}
 													sx={{
 														fontWeight: "bold",
 														border: "2px solid",
@@ -145,4 +146,4 @@ const AllUsers = () => {
 	);
 };
 
-export default AllUsers;
+export default AllBooksList;

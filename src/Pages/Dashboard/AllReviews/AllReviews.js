@@ -16,12 +16,13 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Swal from "sweetalert2";
 
 const AllReviews = () => {
+	const [deleted, setDeleted] = useState(false);
 	const [reviews, setReviews] = useState([]);
 	useEffect(() => {
 		fetch(`${process.env.REACT_APP_SERVER_API}/reviews`)
 			.then((res) => res.json())
 			.then((data) => setReviews(data));
-	});
+	}, [deleted]);
 
 	const handleDelete = (id) => {
 		Swal.fire({
@@ -38,6 +39,7 @@ const AllReviews = () => {
 					.delete(`${process.env.REACT_APP_SERVER_API}/reviews/${id}`)
 					.then(function (response) {
 						Swal.fire("Deleted!", "That Review has been deleted.", "success");
+						setDeleted(true);
 					})
 					.catch(function (error) {
 						console.log(error);
@@ -119,10 +121,10 @@ const AllReviews = () => {
 												{review?.bookId || "N/A"}
 											</TableCell>
 											<TableCell align='left'>
-												{review?.star || "N/A"}
+												{review?.rating || "N/A"}
 											</TableCell>
 											<TableCell align='left'>
-												{review?.userReview || "N/A"}
+												{review?.review || "N/A"}
 											</TableCell>
 											<TableCell align='left'>
 												<Button
@@ -131,7 +133,6 @@ const AllReviews = () => {
 													sx={{
 														fontWeight: "bold",
 														border: "2px solid",
-														backgroundColor: "transparent",
 														borderRadius: "25px",
 													}}
 													variant='contained'>

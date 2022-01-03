@@ -14,15 +14,19 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Swal from "sweetalert2";
+import useAuth from "../../../context/useAuth";
 
-const AllUsers = () => {
+const MyReviews = () => {
+	const { user } = useAuth();
 	const [deleted, setDeleted] = useState(false);
-	const [users, setUsers] = useState([]);
+	const [reviews, setReviews] = useState([]);
 	useEffect(() => {
-		fetch(`${process.env.REACT_APP_SERVER_API}/users`)
+		fetch(
+			`${process.env.REACT_APP_SERVER_API}/reviewsbyemail?email=${user?.email}`,
+		)
 			.then((res) => res.json())
-			.then((data) => setUsers(data));
-	}, [deleted]);
+			.then((data) => setReviews(data));
+	}, [deleted, user?.email]);
 
 	const handleDelete = (id) => {
 		Swal.fire({
@@ -36,9 +40,9 @@ const AllUsers = () => {
 		}).then((result) => {
 			if (result.isConfirmed) {
 				axios
-					.delete(`${process.env.REACT_APP_SERVER_API}/users/${id}`)
+					.delete(`${process.env.REACT_APP_SERVER_API}/reviews/${id}`)
 					.then(function (response) {
-						Swal.fire("Deleted!", "That User has been removed.", "success");
+						Swal.fire("Deleted!", "That Review has been deleted.", "success");
 						setDeleted(true);
 					})
 					.catch(function (error) {
@@ -50,11 +54,7 @@ const AllUsers = () => {
 
 	let count = 1;
 	return (
-		<Container
-			sx={{
-				mt: { xs: 9, md: 2 },
-				minHeight: "100vh",
-			}}>
+		<Container sx={{ mt: { xs: 9, md: 2 }, minHeight: "100vh" }}>
 			<Grid>
 				<Typography
 					className='color-theme'
@@ -62,7 +62,7 @@ const AllUsers = () => {
 					variant='h4'
 					component='div'
 					gutterBottom>
-					All Users
+					My Reviews
 				</Typography>
 				<Grid item xs={12} md={12}>
 					<Paper
@@ -84,22 +84,31 @@ const AllUsers = () => {
 										Email
 									</TableCell>
 									<TableCell className='color-theme' align='left'>
+										Review On
+									</TableCell>
+									<TableCell className='color-theme' align='left'>
+										Star
+									</TableCell>
+									<TableCell className='color-theme' align='left'>
+										Reviews
+									</TableCell>
+									<TableCell className='color-theme' align='left'>
 										Action
 									</TableCell>
 								</TableRow>
 							</TableHead>
-							{users?.length > 0 ? (
+							{reviews?.length > 0 ? (
 								<TableBody sx={{ td: { py: 1 } }}>
-									{users.map((user) => (
+									{reviews.map((review) => (
 										<TableRow
-											key={user?._id}
+											key={review?._id}
 											sx={{
 												"&:last-child td, &:last-child th": { border: 0 },
 											}}>
 											<TableCell align='left'>{count++}</TableCell>
 											<TableCell>
 												<img
-													src={user?.photoURL || "N/A"}
+													src={review?.userPhoto || "N/A"}
 													alt=''
 													width='35px'
 													height='35px'
@@ -107,13 +116,24 @@ const AllUsers = () => {
 												/>
 											</TableCell>
 											<TableCell align='left'>
-												{user?.displayName || "N/A"}
+												{review?.userName || "N/A"}
 											</TableCell>
-											<TableCell align='left'>{user?.email || "N/A"}</TableCell>
+											<TableCell align='left'>
+												{review?.userEmail || "N/A"}
+											</TableCell>
+											<TableCell align='left'>
+												{review?.bookId || "N/A"}
+											</TableCell>
+											<TableCell align='left'>
+												{review?.rating || "N/A"}
+											</TableCell>
+											<TableCell align='left'>
+												{review?.review || "N/A"}
+											</TableCell>
 											<TableCell align='left'>
 												<Button
 													className='button border'
-													onClick={() => handleDelete(user?._id)}
+													onClick={() => handleDelete(review?._id)}
 													sx={{
 														fontWeight: "bold",
 														border: "2px solid",
@@ -134,6 +154,9 @@ const AllUsers = () => {
 										<TableCell align='left'>N/A</TableCell>
 										<TableCell align='left'>N/A</TableCell>
 										<TableCell align='left'>N/A</TableCell>
+										<TableCell align='left'>N/A</TableCell>
+										<TableCell align='left'>N/A</TableCell>
+										<TableCell align='left'>N/A</TableCell>
 									</TableRow>
 								</TableHead>
 							)}
@@ -145,4 +168,4 @@ const AllUsers = () => {
 	);
 };
 
-export default AllUsers;
+export default MyReviews;

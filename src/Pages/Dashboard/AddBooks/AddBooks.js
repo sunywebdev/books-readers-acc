@@ -17,8 +17,9 @@ import { styled } from "@mui/material/styles";
 import { Box } from "@mui/system";
 
 const AddBooks = () => {
+
 	const [submitting, setSubmitting] = useState(false);
-	const [imageLink, setImageLink] = useState(null);
+	const [image, setImageLink] = useState(null);
 	const [loading, setLoading] = useState(false);
 	const uploadImage = async (e) => {
 		const files = e.target.files;
@@ -41,10 +42,29 @@ const AddBooks = () => {
 		display: "none",
 	});
 	const { register, handleSubmit, reset } = useForm();
-	const onSubmit = (data) => {
+	const onSubmit = ({
+		PublishedIn,
+		bookId,
+		bookName,
+		categories,
+		details,
+		publishedBy,
+		publishedYear,
+		imageLink,
+	}) => {
+		const book = {
+			PublishedIn,
+			bookId,
+			bookName,
+			categories,
+			details,
+			publishedBy,
+			publishedYear,
+			imageLink: image,
+		};
 		setSubmitting(true);
 		axios
-			.post(`${process.env.REACT_APP_SERVER_API}/books`, data)
+			.post(`${process.env.REACT_APP_SERVER_API}/books`, book)
 			.then(function (response) {
 				Swal.fire({
 					icon: "success",
@@ -61,6 +81,7 @@ const AddBooks = () => {
 			});
 		reset();
 	};
+
 	return (
 		<Container>
 			<Typography
@@ -116,7 +137,7 @@ const AddBooks = () => {
 						</Box>
 					) : (
 						<img
-							src={imageLink}
+							src={image}
 							style={{ width: "100px", padding: "5px 0" }}
 							alt=''
 						/>
@@ -124,7 +145,13 @@ const AddBooks = () => {
 				</Box>
 				<TextField
 					sx={{ display: "none" }}
-					value={imageLink}
+					value={image}
+					variant='standard'
+					{...register("imageLink")}
+				/>
+				<TextField
+					sx={{ display: "none" }}
+					value={image}
 					variant='standard'
 					{...register("imageLink")}
 				/>
@@ -164,7 +191,7 @@ const AddBooks = () => {
 							<Grid item md={12} xs={12}>
 								<TextField
 									required
-									sx={{ width: "100%", mb: { md: 2, xs: 0 } }}
+									sx={{ width: "100%" }}
 									id='outlined-basic'
 									label='Published In'
 									name='PublishedIn'
@@ -178,33 +205,33 @@ const AddBooks = () => {
 							required
 							sx={{ width: "100%", mb: 2 }}
 							id='"outlined-multiline-flexible'
-							label='details'
-							name='Details About Book'
+							label='Details About Book'
+							name='details'
 							multiline
-							rows={4}
+							rows={10}
 							{...register("details", { required: true })}
 						/>
-						<Grid item md={12} xs={12}>
-							<TextField
-								required
-								sx={{ width: "100%", mb: 2 }}
-								id='outlined-basic'
-								name='readingLink'
-								label='Live Reading Link'
-								{...register("readingLink", { required: true })}
-							/>
-						</Grid>
-						<Grid item md={12} xs={12}>
-							<TextField
-								required
-								sx={{ width: "100%" }}
-								id='outlined-basic'
-								name='bookId'
-								value={`${Math.random().toString(36).substring(2, 9)}`}
-								label='Book ID'
-								{...register("bookId", { required: true })}
-							/>
-						</Grid>
+					</Grid>
+					<Grid item md={6} xs={12}>
+						<TextField
+							required
+							sx={{ width: "100%", mb: { md: 2, xs: 0 } }}
+							id='outlined-basic'
+							name='bookId'
+							value={`${Math.random().toString(36).substring(2, 9)}`}
+							label='Book ID'
+							{...register("bookId", { required: true })}
+						/>
+					</Grid>
+					<Grid item md={6} xs={12}>
+						<TextField
+							required
+							sx={{ width: "100%" }}
+							id='outlined-basic'
+							name='categories'
+							label='Categories'
+							{...register("categories", { required: true })}
+						/>
 					</Grid>
 				</Grid>
 				<Button
@@ -212,6 +239,7 @@ const AddBooks = () => {
 					type='submit'
 					variant='contained'
 					sx={{
+						mt: { xs: 2, md: 0 },
 						width: "100%",
 						mb: 2,
 						px: 3,

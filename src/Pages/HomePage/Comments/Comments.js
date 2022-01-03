@@ -1,7 +1,6 @@
 import { Button, CardMedia, Container } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SwiperCore, { Pagination } from "swiper";
-
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/system";
@@ -14,6 +13,14 @@ import RateReviewIcon from "@mui/icons-material/RateReview";
 SwiperCore.use([Pagination]);
 
 const Comments = () => {
+	const [reviews, setReviews] = useState([]);
+	const bookId = `About-Website`;
+	useEffect(() => {
+		fetch(`${process.env.REACT_APP_SERVER_API}/reviewss?bookId=${bookId}`)
+			.then((res) => res.json())
+			.then((data) => setReviews(data));
+	}, [bookId]);
+	console.log(reviews);
 	return (
 		<Container sx={{ pt: 5 }}>
 			<Typography
@@ -44,7 +51,7 @@ const Comments = () => {
 					},
 				}}
 				className='mySwiper'>
-				{Array.from({ length: 6 }).map((_, idx) => (
+				{reviews.map((review) => (
 					<SwiperSlide>
 						<Box>
 							<Card
@@ -73,7 +80,7 @@ const Comments = () => {
 										border: "5px solid ",
 										backgroundColor: "white",
 									}}
-									image='https://i.pinimg.com/736x/89/90/48/899048ab0cc455154006fdb9676964b3.jpg'
+									image={review?.userPhoto}
 									alt=''
 								/>
 								<Typography
@@ -82,13 +89,11 @@ const Comments = () => {
 									component='div'
 									className='textColor'
 									sx={{ mt: 1.5, fontWeight: "bold" }}>
-									Mr. John Doe
+									{review?.userName}
 								</Typography>
 
 								<Typography variant='body2' sx={{ mt: 1, px: 1 }}>
-									Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
-									nobis dolorem nemo inventore nihil, id eos sint molestias eum
-									esse!
+									{review?.review}
 								</Typography>
 							</Card>
 						</Box>

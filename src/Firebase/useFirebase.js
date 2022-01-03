@@ -13,6 +13,7 @@ import {
 } from "firebase/auth";
 import initializeAuth from "./firebase.init";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 initializeAuth();
 
@@ -25,7 +26,7 @@ const useFirebase = () => {
 	const auth = getAuth();
 	const googleProvider = new GoogleAuthProvider();
 
-	const signInUsingGoogle = (history, location, setOpen) => {
+	const signInUsingGoogle = (navigate, location) => {
 		setIsloading(true);
 		signInWithPopup(auth, googleProvider)
 			.then((result) => {
@@ -34,12 +35,9 @@ const useFirebase = () => {
 					user?.email,
 					user?.displayName,
 					user?.photoURL,
-					setOpen,
-					history,
+					navigate,
 					location,
 				);
-				/* const destination = location?.state?.from || "/";
-				history.replace(destination); */
 			})
 			.catch((error) => {
 				const errorMessage = error.message;
@@ -47,26 +45,18 @@ const useFirebase = () => {
 			})
 			.finally(() => setIsloading(false));
 	};
-	const resetPassword = (
-		auth,
-		email,
-		setState,
-		setSuccess,
-		data,
-		history,
-		location,
-		setOpen,
-	) => {
+	const resetPassword = (auth, email, navigate, location) => {
 		sendPasswordResetEmail(auth, email)
 			.then(() => {
-				const successMsg = "Please Check Your Email Inbox";
-				setState(data);
-				setSuccess(successMsg);
-				setOpen(true);
-				setTimeout(function () {
-					const destination = location?.state?.from || "/login";
-					history.replace(destination);
-				}, 4000);
+				Swal.fire({
+					icon: "success",
+					title: "Please Check Your Email Inbox",
+					showConfirmButton: false,
+					timer: 2000,
+				}).then(function () {
+					const destination = location?.state?.from || "/";
+					navigate(destination);
+				});
 			})
 			.catch((error) => {
 				const errorMessage = error.message;
@@ -81,8 +71,7 @@ const useFirebase = () => {
 		password,
 		displayName,
 		photoURL,
-		setOpen,
-		history,
+		navigate,
 		location,
 	) => {
 		setIsloading(true);
@@ -94,12 +83,7 @@ const useFirebase = () => {
 					photoURL: photoURL,
 				});
 
-				/* 	setOpen(true);
-				setTimeout(function () {
-					const destination = location?.state?.from || "/";
-					history.replace(destination);
-				}, 4000); */
-				saveUserToDb(email, displayName, photoURL, setOpen, history, location);
+				saveUserToDb(email, displayName, photoURL, navigate, location);
 			})
 			.catch((error) => {
 				const errorMessage = error.message;
@@ -112,18 +96,21 @@ const useFirebase = () => {
 		auth,
 		email,
 		password,
-		history,
+		navigate,
 		location,
-		setOpen,
 	) => {
 		setIsloading(true);
 		signInWithEmailAndPassword(auth, email, password)
 			.then(() => {
-				setOpen(true);
-				setTimeout(function () {
+				Swal.fire({
+					icon: "success",
+					title: "Login Successfull",
+					showConfirmButton: false,
+					timer: 2000,
+				}).then(function () {
 					const destination = location?.state?.from || "/";
-					history.replace(destination);
-				}, 4000);
+					navigate(destination);
+				});
 			})
 			.catch((error) => {
 				const errorMessage = error.message;
@@ -132,22 +119,19 @@ const useFirebase = () => {
 			.finally(() => setIsloading(false));
 	};
 
-	const saveUserToDb = (
-		email,
-		displayName,
-		photoURL,
-		setOpen,
-		history,
-		location,
-	) => {
+	const saveUserToDb = (email, displayName, photoURL, navigate, location) => {
 		axios
 			.post(`${process.env.REACT_APP_SERVER_API}/users`, user)
 			.then(function (response) {
-				setOpen(true);
-				setTimeout(function () {
+				Swal.fire({
+					icon: "success",
+					title: "Acccount Creation Successfull",
+					showConfirmButton: false,
+					timer: 2000,
+				}).then(function () {
 					const destination = location?.state?.from || "/";
-					history.replace(destination);
-				}, 4000);
+					navigate(destination);
+				});
 			})
 			.catch(function (error) {
 				console.log(error);
@@ -157,18 +141,21 @@ const useFirebase = () => {
 		email,
 		displayName,
 		photoURL,
-		setOpen,
-		history,
+		navigate,
 		location,
 	) => {
 		axios
 			.put(`${process.env.REACT_APP_SERVER_API}/users`, user)
 			.then(function (response) {
-				setOpen(true);
-				setTimeout(function () {
+				Swal.fire({
+					icon: "success",
+					title: "Login Successfull",
+					showConfirmButton: false,
+					timer: 2000,
+				}).then(function () {
 					const destination = location?.state?.from || "/";
-					history.replace(destination);
-				}, 4000);
+					navigate(destination);
+				});
 			})
 			.catch(function (error) {
 				console.log(error);

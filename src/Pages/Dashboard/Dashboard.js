@@ -17,10 +17,12 @@ import Logout from "@mui/icons-material/Logout";
 import HomeIcon from "@mui/icons-material/Home";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import PersonIcon from "@mui/icons-material/Person";
+import useAuth from "../../context/useAuth";
 
 const drawerWidth = 222;
 
 function Dashboard(props) {
+	const { logOut, admin } = useAuth();
 	const { window } = props;
 	const [mobileOpen, setMobileOpen] = React.useState(false);
 	const handleDrawerToggle = () => {
@@ -44,6 +46,74 @@ function Dashboard(props) {
 						<ListItemText primary={"Profile"} />
 					</ListItem>
 				</Link>
+				{admin && (
+					<>
+						<Link
+							style={{
+								textDecoration: "none",
+								fontWeight: "bold",
+								fontSize: "15px",
+								color: "#31887D",
+							}}
+							to='addbook'>
+							<ListItem button>
+								<ListItemIcon
+									sx={{ justifyContent: "center", color: "#31887D" }}>
+									<MenuBookIcon />
+								</ListItemIcon>
+								<ListItemText primary={"Add New Book"} />
+							</ListItem>
+						</Link>
+						<Link
+							style={{
+								textDecoration: "none",
+								fontWeight: "bold",
+								fontSize: "15px",
+								color: "#31887D",
+							}}
+							to='allbooks'>
+							<ListItem button>
+								<ListItemIcon
+									sx={{ justifyContent: "center", color: "#31887D" }}>
+									<MenuBookIcon />
+								</ListItemIcon>
+								<ListItemText primary={"All Books"} />
+							</ListItem>
+						</Link>
+						<Link
+							style={{
+								textDecoration: "none",
+								fontWeight: "bold",
+								fontSize: "15px",
+								color: "#31887D",
+							}}
+							to='allmails'>
+							<ListItem button>
+								<ListItemIcon
+									sx={{ justifyContent: "center", color: "#31887D" }}>
+									<MenuBookIcon />
+								</ListItemIcon>
+								<ListItemText primary={"All Mails"} />
+							</ListItem>
+						</Link>
+						<Link
+							style={{
+								textDecoration: "none",
+								fontWeight: "bold",
+								fontSize: "15px",
+								color: "#31887D",
+							}}
+							to='allreviews'>
+							<ListItem button>
+								<ListItemIcon
+									sx={{ justifyContent: "center", color: "#31887D" }}>
+									<MenuBookIcon />
+								</ListItemIcon>
+								<ListItemText primary={"All Reviews"} />
+							</ListItem>
+						</Link>
+					</>
+				)}
 				<Link
 					style={{
 						textDecoration: "none",
@@ -51,59 +121,50 @@ function Dashboard(props) {
 						fontSize: "15px",
 						color: "#31887D",
 					}}
-					to='addbook'>
+					to='myreviews'>
 					<ListItem button>
 						<ListItemIcon sx={{ justifyContent: "center", color: "#31887D" }}>
 							<MenuBookIcon />
 						</ListItemIcon>
-						<ListItemText primary={"Add New Book"} />
+						<ListItemText primary={"My Reviews"} />
 					</ListItem>
 				</Link>
-				<Link
-					style={{
-						textDecoration: "none",
-						fontWeight: "bold",
-						fontSize: "15px",
-						color: "#31887D",
-					}}
-					to='allmails'>
-					<ListItem button>
-						<ListItemIcon sx={{ justifyContent: "center", color: "#31887D" }}>
-							<MenuBookIcon />
-						</ListItemIcon>
-						<ListItemText primary={"All Mills"} />
-					</ListItem>
-				</Link>
-				<Link
-					style={{
-						textDecoration: "none",
-						fontWeight: "bold",
-						fontSize: "15px",
-						color: "#31887D",
-					}}
-					to='allreviews'>
-					<ListItem button>
-						<ListItemIcon sx={{ justifyContent: "center", color: "#31887D" }}>
-							<MenuBookIcon />
-						</ListItemIcon>
-						<ListItemText primary={"All Reviews"} />
-					</ListItem>
-				</Link>
-				<Link
-					style={{
-						textDecoration: "none",
-						fontWeight: "bold",
-						fontSize: "15px",
-						color: "#31887D",
-					}}
-					to='allusers'>
-					<ListItem button>
-						<ListItemIcon sx={{ justifyContent: "center", color: "#31887D" }}>
-							<MenuBookIcon />
-						</ListItemIcon>
-						<ListItemText primary={"All Users"} />
-					</ListItem>
-				</Link>
+				{admin && (
+					<>
+						<Link
+							style={{
+								textDecoration: "none",
+								fontWeight: "bold",
+								fontSize: "15px",
+								color: "#31887D",
+							}}
+							to='userRoles'>
+							<ListItem button>
+								<ListItemIcon
+									sx={{ justifyContent: "center", color: "#31887D" }}>
+									<MenuBookIcon />
+								</ListItemIcon>
+								<ListItemText primary={"Page Roles"} />
+							</ListItem>
+						</Link>
+						<Link
+							style={{
+								textDecoration: "none",
+								fontWeight: "bold",
+								fontSize: "15px",
+								color: "#31887D",
+							}}
+							to='allusers'>
+							<ListItem button>
+								<ListItemIcon
+									sx={{ justifyContent: "center", color: "#31887D" }}>
+									<MenuBookIcon />
+								</ListItemIcon>
+								<ListItemText primary={"All Users"} />
+							</ListItem>
+						</Link>
+					</>
+				)}
 
 				<Link
 					style={{
@@ -120,7 +181,7 @@ function Dashboard(props) {
 						<ListItemText primary={"Home"} />
 					</ListItem>
 				</Link>
-				<ListItem button sx={{ color: "#31887D" }}>
+				<ListItem onClick={logOut} button sx={{ color: "#31887D" }}>
 					<ListItemIcon sx={{ justifyContent: "center", color: "#31887D" }}>
 						<Logout />
 					</ListItemIcon>

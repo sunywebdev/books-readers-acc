@@ -16,12 +16,13 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Swal from "sweetalert2";
 
 const AllMails = () => {
+	const [deleted, setDeleted] = useState(false);
 	const [mails, setMails] = useState([]);
 	useEffect(() => {
 		fetch(`${process.env.REACT_APP_SERVER_API}/mails`)
 			.then((res) => res.json())
 			.then((data) => setMails(data));
-	});
+	}, [deleted]);
 
 	const handleDelete = (id) => {
 		Swal.fire({
@@ -38,6 +39,7 @@ const AllMails = () => {
 					.delete(`${process.env.REACT_APP_SERVER_API}/mails/${id}`)
 					.then(function (response) {
 						Swal.fire("Deleted!", "Your mail has been deleted.", "success");
+						setDeleted(true);
 					})
 					.catch(function (error) {
 						console.log(error);

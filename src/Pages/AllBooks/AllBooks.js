@@ -7,11 +7,19 @@ import {
 	Grid,
 	Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Footer from "../../Shared/Footer/Footer";
 import Header from "../../Shared/Header/Header";
 
 const AllBooks = () => {
+	const [books, setBooks] = useState([]);
+	useEffect(() => {
+		fetch(`${process.env.REACT_APP_SERVER_API}/books`)
+			.then((res) => res.json())
+			.then((data) => setBooks(data));
+	}, []);
+
 	return (
 		<>
 			<Header />
@@ -29,40 +37,41 @@ const AllBooks = () => {
 					alignItems='center'
 					container
 					spacing={2}>
-					{Array.from({ length: 27 }).map((_, idx) => (
+					{books.map((book) => (
 						<Grid item md={4} xs={12}>
-							<Card sx={{ border: 0, boxShadow: 0 }}>
-								<CardActionArea sx={{ display: "flex" }}>
-									<CardMedia
-										style={{
-											width: "150px",
-											height: "250px",
-											margin: "0 auto",
-										}}
-										component='img'
-										image='https://covers.openlibrary.org/w/id/8303392-M.jpg'
-										alt=''
-									/>
-									<CardContent sx={{ textAlign: "left" }}>
-										<Typography gutterBottom variant='h6' component='div'>
-											Harry Potter and the Goblet of Fire
-										</Typography>
-										<Typography
-											gutterBottom
-											variant='body2'
-											component='div'
-											sx={{ fontWeight: "bold", mb: 1 }}>
-											By Xulon Press
-										</Typography>
-										<Typography variant='body2' color='text.secondary'>
-											Harry Potter is midway through his training as a wizard
-											and his coming of age. Harry wants to get away from the
-											pernicious Dursleys and go to the International Quidditch
-											Cup.
-										</Typography>
-									</CardContent>
-								</CardActionArea>
-							</Card>
+							<Link
+								to={`/book/${book?._id}`}
+								style={{ textDecoration: "none" }}>
+								<Card sx={{ border: 0, boxShadow: 0 }}>
+									<CardActionArea sx={{ display: "flex" }}>
+										<CardMedia
+											style={{
+												width: "150px",
+												height: "250px",
+												margin: "0 auto",
+											}}
+											component='img'
+											image={book?.imageLink}
+											alt=''
+										/>
+										<CardContent sx={{ textAlign: "left" }}>
+											<Typography gutterBottom variant='h6' component='div'>
+												{book?.bookName}
+											</Typography>
+											<Typography
+												gutterBottom
+												variant='body2'
+												component='div'
+												sx={{ fontWeight: "bold", mb: 1 }}>
+												By {book?.publishedBy}
+											</Typography>
+											<Typography variant='body2' color='text.secondary'>
+												{book?.details.slice(0, 200)}....
+											</Typography>
+										</CardContent>
+									</CardActionArea>
+								</Card>
+							</Link>
 						</Grid>
 					))}
 				</Grid>
