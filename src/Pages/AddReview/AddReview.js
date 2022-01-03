@@ -16,6 +16,7 @@ import useAuth from "../../context/useAuth";
 const AddReview = () => {
 	const { user } = useAuth();
 	const [singleUser, setSingleUser] = useState();
+	const { register, handleSubmit, reset } = useForm();
 	useEffect(() => {
 		fetch(
 			`${process.env.REACT_APP_SERVER_API}/singleUsers?email=${user?.email}`,
@@ -25,9 +26,9 @@ const AddReview = () => {
 				reset(data);
 				setSingleUser(data);
 			});
-	}, [user?.email]);
+	}, [reset, user?.email]);
 	const [submitting, setSubmitting] = useState(false);
-	const { register, handleSubmit, reset } = useForm();
+
 	const onSubmit = ({ review }) => {
 		setSubmitting(true);
 		const userReview = {
