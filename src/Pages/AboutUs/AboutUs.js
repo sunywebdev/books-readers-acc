@@ -19,7 +19,7 @@ const AboutUs = () => {
 				</Typography>
 
 				<Grid alignItems='center' container spacing={2}>
-					<Grid item md={4} xs={12} sx={{ textAlign: "left" }}>
+					<Grid item md={4} xs={12}>
 						<img
 							src={about}
 							style={{ width: "300px", height: "450px", margin: "0 auto" }}
