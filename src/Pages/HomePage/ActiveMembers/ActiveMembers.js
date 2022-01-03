@@ -1,14 +1,13 @@
-import {
-	Card,
-	CardMedia,
-	Container,
-	Divider,
-	Grid,
-	Typography,
-} from "@mui/material";
-import React from "react";
+import { Card, CardMedia, Container, Grid, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
 
 const ActiveMembers = () => {
+	const [users, setUsers] = useState([]);
+	useEffect(() => {
+		fetch(`${process.env.REACT_APP_SERVER_API}/users`)
+			.then((res) => res.json())
+			.then((data) => setUsers(data));
+	});
 	return (
 		<Container sx={{ pt: 5 }}>
 			<Typography
@@ -18,10 +17,9 @@ const ActiveMembers = () => {
 				component='div'
 				gutterBottom>
 				Our Active Members
-				<Divider className='hr' />
 			</Typography>
 			<Grid container spacing={2}>
-				{Array.from({ length: 12 }).map((_, idx) => (
+				{users.map((user) => (
 					<Grid item md={2} sm={3} xs={6}>
 						<Card
 							className='borderColor'
@@ -44,7 +42,7 @@ const ActiveMembers = () => {
 									boxShadow: " 4px 24px 34px 1px rgba(0,0,0,0.16)",
 									backgroundColor: "white",
 								}}
-								image='https://i.pinimg.com/736x/89/90/48/899048ab0cc455154006fdb9676964b3.jpg'
+								image={user?.photoURL}
 								alt=''
 							/>
 							<Typography
@@ -53,7 +51,7 @@ const ActiveMembers = () => {
 								component='div'
 								className='textColor'
 								sx={{ mt: 1.5, fontWeight: "bold" }}>
-								Mr. John Doe
+								{user?.displayName}
 							</Typography>
 						</Card>
 					</Grid>

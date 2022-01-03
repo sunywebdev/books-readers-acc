@@ -16,6 +16,7 @@ import { Link, Outlet } from "react-router-dom";
 import Logout from "@mui/icons-material/Logout";
 import HomeIcon from "@mui/icons-material/Home";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
+import PersonIcon from "@mui/icons-material/Person";
 
 const drawerWidth = 222;
 
@@ -35,12 +36,72 @@ function Dashboard(props) {
 						fontSize: "15px",
 						color: "#31887D",
 					}}
+					to='/dashboard'>
+					<ListItem button>
+						<ListItemIcon sx={{ justifyContent: "center", color: "#31887D" }}>
+							<PersonIcon />
+						</ListItemIcon>
+						<ListItemText primary={"Profile"} />
+					</ListItem>
+				</Link>
+				<Link
+					style={{
+						textDecoration: "none",
+						fontWeight: "bold",
+						fontSize: "15px",
+						color: "#31887D",
+					}}
 					to='addbook'>
 					<ListItem button>
 						<ListItemIcon sx={{ justifyContent: "center", color: "#31887D" }}>
 							<MenuBookIcon />
 						</ListItemIcon>
 						<ListItemText primary={"Add New Book"} />
+					</ListItem>
+				</Link>
+				<Link
+					style={{
+						textDecoration: "none",
+						fontWeight: "bold",
+						fontSize: "15px",
+						color: "#31887D",
+					}}
+					to='allmails'>
+					<ListItem button>
+						<ListItemIcon sx={{ justifyContent: "center", color: "#31887D" }}>
+							<MenuBookIcon />
+						</ListItemIcon>
+						<ListItemText primary={"All Mills"} />
+					</ListItem>
+				</Link>
+				<Link
+					style={{
+						textDecoration: "none",
+						fontWeight: "bold",
+						fontSize: "15px",
+						color: "#31887D",
+					}}
+					to='allreviews'>
+					<ListItem button>
+						<ListItemIcon sx={{ justifyContent: "center", color: "#31887D" }}>
+							<MenuBookIcon />
+						</ListItemIcon>
+						<ListItemText primary={"All Reviews"} />
+					</ListItem>
+				</Link>
+				<Link
+					style={{
+						textDecoration: "none",
+						fontWeight: "bold",
+						fontSize: "15px",
+						color: "#31887D",
+					}}
+					to='allusers'>
+					<ListItem button>
+						<ListItemIcon sx={{ justifyContent: "center", color: "#31887D" }}>
+							<MenuBookIcon />
+						</ListItemIcon>
+						<ListItemText primary={"All Users"} />
 					</ListItem>
 				</Link>
 

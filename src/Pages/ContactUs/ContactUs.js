@@ -1,28 +1,45 @@
-import { Button, Container, Grid, TextField, Typography } from "@mui/material";
-import React from "react";
+import {
+	Backdrop,
+	Button,
+	CircularProgress,
+	Container,
+	Grid,
+	TextField,
+	Typography,
+} from "@mui/material";
+import axios from "axios";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 import contact from "../../Images/contact.jpg";
 import Footer from "../../Shared/Footer/Footer";
 import Header from "../../Shared/Header/Header";
 
 const ContactUs = () => {
+	const [submitting, setSubmitting] = useState(false);
 	const { register, handleSubmit, reset } = useForm();
 	const onSubmit = (data) => {
-		console.log(data);
-		reset();
+		setSubmitting(true);
+		axios
+			.post(`${process.env.REACT_APP_SERVER_API}/mails`, data)
+			.then(function (response) {
+				setSubmitting(false);
+				Swal.fire({
+					icon: "success",
+					title: "Mail Send Successfully",
+					showConfirmButton: true,
+					timer: 2500,
+				});
+				reset();
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
 	};
 	return (
 		<>
 			<Header />
-			<Container sx={{ pt: 2, pb: 5 }}>
-				<Typography
-					className='textColor'
-					sx={{ fontWeight: 900, mb: 4 }}
-					variant='h3'
-					component='div'
-					gutterBottom>
-					Contact Us
-				</Typography>
+			<Container sx={{ py: 5 }}>
 
 				<Grid alignItems='center' container spacing={2}>
 					<Grid item md={4} xs={12}>
@@ -115,6 +132,14 @@ const ContactUs = () => {
 						</form>
 					</Grid>
 				</Grid>
+				<Backdrop
+					sx={{
+						color: "#fff",
+						zIndex: (theme) => theme.zIndex.drawer + 1,
+					}}
+					open={submitting}>
+					<CircularProgress color='inherit' />
+				</Backdrop>
 			</Container>
 			<Footer />
 		</>
