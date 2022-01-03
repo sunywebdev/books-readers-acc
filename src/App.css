@@ -1,13 +1,9 @@
 .App {
 	text-align: center;
+	background-color: #fcfbf7 !important;
 }
-.hr {
-	height: 17px !important;
-	margin: -5px 0px 7px 0px !important;
-	opacity: 1 !important;
-	background-color: black !important;
-	-webkit-mask: url(./Images/hr.svg) 50% 0 no-repeat !important;
-	mask: url(./Images/hr.svg) 50% 0 no-repeat !important;
+.MuiButton-root {
+	background-color: #0477b9 !important;
 }
 .swiper {
 	width: 100%;

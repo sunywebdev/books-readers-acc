@@ -21,13 +21,15 @@ const Header = () => {
 	return (
 		<Box sx={{ flexGrow: 1 }}>
 			<AppBar position='static'>
-				<Toolbar>
+				<Toolbar sx={{ backgroundColor: "#333333" }}>
 					<Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
 						Books Readers Associations
 					</Typography>
 
 					{!user?.email ? (
-						<Link to='/login' style={{ textDecoration: "none" }}>
+						<Link
+							to='/login'
+							style={{ textDecoration: "none", color: "white" }}>
 							<Button color='inherit'>Login</Button>
 						</Link>
 					) : (

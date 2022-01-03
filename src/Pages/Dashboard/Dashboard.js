@@ -18,6 +18,11 @@ import HomeIcon from "@mui/icons-material/Home";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import PersonIcon from "@mui/icons-material/Person";
 import useAuth from "../../context/useAuth";
+import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
+import EmailIcon from "@mui/icons-material/Email";
+import ReviewsIcon from "@mui/icons-material/Reviews";
+import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
+import GroupIcon from "@mui/icons-material/Group";
 
 const drawerWidth = 222;
 
@@ -36,11 +41,11 @@ function Dashboard(props) {
 						textDecoration: "none",
 						fontWeight: "bold",
 						fontSize: "15px",
-						color: "#31887D",
+						color: "#02598b",
 					}}
 					to='/dashboard'>
 					<ListItem button>
-						<ListItemIcon sx={{ justifyContent: "center", color: "#31887D" }}>
+						<ListItemIcon sx={{ justifyContent: "center", color: "#02598b" }}>
 							<PersonIcon />
 						</ListItemIcon>
 						<ListItemText primary={"Profile"} />
@@ -53,12 +58,12 @@ function Dashboard(props) {
 								textDecoration: "none",
 								fontWeight: "bold",
 								fontSize: "15px",
-								color: "#31887D",
+								color: "#02598b",
 							}}
 							to='addbook'>
 							<ListItem button>
 								<ListItemIcon
-									sx={{ justifyContent: "center", color: "#31887D" }}>
+									sx={{ justifyContent: "center", color: "#02598b" }}>
 									<MenuBookIcon />
 								</ListItemIcon>
 								<ListItemText primary={"Add New Book"} />
@@ -69,13 +74,13 @@ function Dashboard(props) {
 								textDecoration: "none",
 								fontWeight: "bold",
 								fontSize: "15px",
-								color: "#31887D",
+								color: "#02598b",
 							}}
 							to='allbooks'>
 							<ListItem button>
 								<ListItemIcon
-									sx={{ justifyContent: "center", color: "#31887D" }}>
-									<MenuBookIcon />
+									sx={{ justifyContent: "center", color: "#02598b" }}>
+									<LocalLibraryIcon />
 								</ListItemIcon>
 								<ListItemText primary={"All Books"} />
 							</ListItem>
@@ -85,13 +90,13 @@ function Dashboard(props) {
 								textDecoration: "none",
 								fontWeight: "bold",
 								fontSize: "15px",
-								color: "#31887D",
+								color: "#02598b",
 							}}
 							to='allmails'>
 							<ListItem button>
 								<ListItemIcon
-									sx={{ justifyContent: "center", color: "#31887D" }}>
-									<MenuBookIcon />
+									sx={{ justifyContent: "center", color: "#02598b" }}>
+									<EmailIcon />
 								</ListItemIcon>
 								<ListItemText primary={"All Mails"} />
 							</ListItem>
@@ -101,13 +106,13 @@ function Dashboard(props) {
 								textDecoration: "none",
 								fontWeight: "bold",
 								fontSize: "15px",
-								color: "#31887D",
+								color: "#02598b",
 							}}
 							to='allreviews'>
 							<ListItem button>
 								<ListItemIcon
-									sx={{ justifyContent: "center", color: "#31887D" }}>
-									<MenuBookIcon />
+									sx={{ justifyContent: "center", color: "#02598b" }}>
+									<ReviewsIcon />
 								</ListItemIcon>
 								<ListItemText primary={"All Reviews"} />
 							</ListItem>
@@ -119,12 +124,12 @@ function Dashboard(props) {
 						textDecoration: "none",
 						fontWeight: "bold",
 						fontSize: "15px",
-						color: "#31887D",
+						color: "#02598b",
 					}}
 					to='myreviews'>
 					<ListItem button>
-						<ListItemIcon sx={{ justifyContent: "center", color: "#31887D" }}>
-							<MenuBookIcon />
+						<ListItemIcon sx={{ justifyContent: "center", color: "#02598b" }}>
+							<ReviewsIcon />
 						</ListItemIcon>
 						<ListItemText primary={"My Reviews"} />
 					</ListItem>
@@ -136,13 +141,13 @@ function Dashboard(props) {
 								textDecoration: "none",
 								fontWeight: "bold",
 								fontSize: "15px",
-								color: "#31887D",
+								color: "#02598b",
 							}}
 							to='userRoles'>
 							<ListItem button>
 								<ListItemIcon
-									sx={{ justifyContent: "center", color: "#31887D" }}>
-									<MenuBookIcon />
+									sx={{ justifyContent: "center", color: "#02598b" }}>
+									<VerifiedUserIcon />
 								</ListItemIcon>
 								<ListItemText primary={"Page Roles"} />
 							</ListItem>
@@ -152,13 +157,13 @@ function Dashboard(props) {
 								textDecoration: "none",
 								fontWeight: "bold",
 								fontSize: "15px",
-								color: "#31887D",
+								color: "#02598b",
 							}}
 							to='allusers'>
 							<ListItem button>
 								<ListItemIcon
-									sx={{ justifyContent: "center", color: "#31887D" }}>
-									<MenuBookIcon />
+									sx={{ justifyContent: "center", color: "#02598b" }}>
+									<GroupIcon />
 								</ListItemIcon>
 								<ListItemText primary={"All Users"} />
 							</ListItem>
@@ -171,18 +176,18 @@ function Dashboard(props) {
 						textDecoration: "none",
 						fontWeight: "bold",
 						fontSize: "15px",
-						color: "#31887D",
+						color: "#02598b",
 					}}
 					to='/'>
 					<ListItem button>
-						<ListItemIcon sx={{ justifyContent: "center", color: "#31887D" }}>
+						<ListItemIcon sx={{ justifyContent: "center", color: "#02598b" }}>
 							<HomeIcon />
 						</ListItemIcon>
 						<ListItemText primary={"Home"} />
 					</ListItem>
 				</Link>
-				<ListItem onClick={logOut} button sx={{ color: "#31887D" }}>
-					<ListItemIcon sx={{ justifyContent: "center", color: "#31887D" }}>
+				<ListItem onClick={logOut} button sx={{ color: "#02598b" }}>
+					<ListItemIcon sx={{ justifyContent: "center", color: "#02598b" }}>
 						<Logout />
 					</ListItemIcon>
 					<ListItemText primary={"LogOut"} />
@@ -202,7 +207,7 @@ function Dashboard(props) {
 				sx={{
 					width: { sm: `calc(100% - ${drawerWidth}px)` },
 					ml: { sm: `${drawerWidth}px` },
-					backgroundColor: "#31887D",
+					backgroundColor: "#02598b",
 				}}>
 				<Toolbar>
 					<IconButton
@@ -235,6 +240,7 @@ function Dashboard(props) {
 						"& .MuiDrawer-paper": {
 							boxSizing: "border-box",
 							width: drawerWidth,
+							justifyContent: "center",
 						},
 					}}>
 					{drawer}
@@ -246,6 +252,7 @@ function Dashboard(props) {
 						"& .MuiDrawer-paper": {
 							boxSizing: "border-box",
 							width: drawerWidth,
+							justifyContent: "center",
 						},
 					}}
 					open>

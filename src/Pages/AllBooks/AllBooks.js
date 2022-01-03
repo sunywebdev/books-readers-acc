@@ -26,7 +26,7 @@ const AllBooks = () => {
 			<Container sx={{ py: 5 }}>
 				<Typography
 					className='textColor'
-					sx={{ fontWeight: 900, mb: 3.5 }}
+					sx={{ fontWeight: 900, mb: 3.5, color: "#02598b" }}
 					variant='h4'
 					component='div'
 					gutterBottom>
@@ -55,7 +55,11 @@ const AllBooks = () => {
 											alt=''
 										/>
 										<CardContent sx={{ textAlign: "left" }}>
-											<Typography gutterBottom variant='h6' component='div'>
+											<Typography
+												gutterBottom
+												variant='h6'
+												component='div'
+												sx={{ color: "#02598b", fontWeight: "bold" }}>
 												{book?.bookName}
 											</Typography>
 											<Typography

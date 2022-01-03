@@ -20,7 +20,7 @@ const Footer = () => {
 							variant='h6'
 							gutterBottom
 							component='div'
-							sx={{ pl: 2, fontWeight: "bold" }}>
+							sx={{ pl: 2, fontWeight: "bold", color: "#02598b" }}>
 							Open Library
 						</Typography>
 						<List>
@@ -49,7 +49,7 @@ const Footer = () => {
 							variant='h6'
 							gutterBottom
 							component='div'
-							sx={{ pl: 2, fontWeight: "bold" }}>
+							sx={{ pl: 2, fontWeight: "bold", color: "#02598b" }}>
 							Discover
 						</Typography>
 						<List>
@@ -78,7 +78,7 @@ const Footer = () => {
 							variant='h6'
 							gutterBottom
 							component='div'
-							sx={{ pl: 2, fontWeight: "bold" }}>
+							sx={{ pl: 2, fontWeight: "bold", color: "#02598b" }}>
 							Develop
 						</Typography>
 						<List>
@@ -101,7 +101,7 @@ const Footer = () => {
 							variant='h6'
 							gutterBottom
 							component='div'
-							sx={{ pl: 2, fontWeight: "bold" }}>
+							sx={{ pl: 2, fontWeight: "bold", color: "#02598b" }}>
 							Help
 						</Typography>
 						<List>
@@ -123,8 +123,8 @@ const Footer = () => {
 				variant='subtitle'
 				gutterBottom
 				component='div'
-				sx={{ textAlign: "center", py: 2 }}>
-				&copy; All Rights Reserved By BBRA
+				sx={{ textAlign: "center", py: 2, color: "#02598b" }}>
+				&copy; All Rights Reserved
 			</Typography>
 		</>
 	);

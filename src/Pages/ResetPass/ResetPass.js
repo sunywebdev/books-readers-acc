@@ -57,9 +57,9 @@ export default function ResetPass() {
 						sx={{
 							mt: 3,
 							mb: 2,
-							backgroundColor: "#31887D",
+							backgroundColor: "#02598b",
 							"&.MuiButtonBase-root:hover": {
-								bgcolor: "#31887D",
+								bgcolor: "#02598b",
 							},
 						}}>
 						Reset Password

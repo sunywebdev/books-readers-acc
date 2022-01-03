@@ -40,7 +40,6 @@ const ContactUs = () => {
 		<>
 			<Header />
 			<Container sx={{ py: 5 }}>
-
 				<Grid alignItems='center' container spacing={2}>
 					<Grid item md={4} xs={12}>
 						<img
@@ -52,7 +51,7 @@ const ContactUs = () => {
 					<Grid item md={8} xs={12} sx={{ textAlign: "left" }}>
 						<Typography
 							className='textColor'
-							sx={{ fontWeight: 900, mb: 2 }}
+							sx={{ fontWeight: 900, mb: 2, color: "#02598b" }}
 							variant='h4'
 							component='div'>
 							How Can We Help You?

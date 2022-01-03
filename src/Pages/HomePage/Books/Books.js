@@ -11,19 +11,19 @@ import {
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const Books = () => {
+const ThrillerBooks = () => {
 	const [books, setBooks] = useState([]);
 	useEffect(() => {
 		fetch(`${process.env.REACT_APP_SERVER_API}/books`)
 			.then((res) => res.json())
-			.then((data) => setBooks(data));
+			.then((data) => setBooks(data.slice(0, 3)));
 	}, []);
 
 	return (
 		<Container sx={{ pt: 5 }}>
 			<Typography
 				className='textColor'
-				sx={{ fontWeight: 900, mb: 3.5 }}
+				sx={{ fontWeight: 900, mb: 3.5, color: "#02598b" }}
 				variant='h4'
 				component='div'
 				gutterBottom>
@@ -50,7 +50,11 @@ const Books = () => {
 										alt=''
 									/>
 									<CardContent sx={{ textAlign: "left" }}>
-										<Typography gutterBottom variant='h6' component='div'>
+										<Typography
+											gutterBottom
+											variant='h6'
+											component='div'
+											sx={{ color: "#02598b", fontWeight: "bold" }}>
 											{book?.bookName}
 										</Typography>
 										<Typography
@@ -89,4 +93,4 @@ const Books = () => {
 	);
 };
 
-export default Books;
+export default ThrillerBooks;

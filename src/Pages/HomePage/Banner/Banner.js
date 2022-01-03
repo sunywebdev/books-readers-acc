@@ -23,11 +23,11 @@ const Banner = () => {
 					<Typography
 						variant='h3'
 						component='div'
-						sx={{ fontWeight: "bold", mb: 3 }}>
+						sx={{ fontWeight: "bold", mb: 3, color: "#02598b" }}>
 						Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem,
 						ducimus.
 					</Typography>
-					<Typography variant='body1' component='div'>
+					<Typography variant='body1' component='div' sx={{ color: "#02598b" }}>
 						Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero,
 						aperiam provident. Possimus nostrum obcaecati delectus repellat,
 						placeat soluta nulla velit molestiae, odit dolores illum ipsum sed

@@ -34,6 +34,7 @@ import Swal from "sweetalert2";
 
 const SingleBook = () => {
 	const { user } = useAuth();
+	const [submitting, setSubmitting] = useState(false);
 	const [value, setValue] = React.useState(0);
 	const { handleSubmit, register, reset } = useForm();
 	const onSubmit = ({ review, rating }) => {
@@ -77,14 +78,6 @@ const SingleBook = () => {
 			});
 	}, [reset, user?.email]);
 	const { id } = useParams();
-	const [reviews, setReviews] = useState([]);
-	useEffect(() => {
-		fetch(`${process.env.REACT_APP_SERVER_API}/reviewss?bookId=${book?.bookId}`)
-			.then((res) => res.json())
-			.then((data) => setReviews(data));
-	});
-	console.log(reviews);
-	const [submitting, setSubmitting] = useState(false);
 	const [book, setBook] = useState();
 	useEffect(() => {
 		fetch(`${process.env.REACT_APP_SERVER_API}/books/${id}`)
@@ -94,6 +87,13 @@ const SingleBook = () => {
 				setBook(data);
 			});
 	}, [id, reset]);
+	const [reviews, setReviews] = useState([]);
+	useEffect(() => {
+		fetch(`${process.env.REACT_APP_SERVER_API}/reviewss?bookId=${book?.bookId}`)
+			.then((res) => res.json())
+			.then((data) => setReviews(data));
+	}, [book?.bookId]);
+	console.log(reviews);
 
 	return (
 		<>
@@ -226,38 +226,48 @@ const SingleBook = () => {
 							<Typography variant='h4' sx={{ fontWeight: "bold", pt: 1 }}>
 								Community Reviews
 							</Typography>
-							<List
-								sx={{
-									width: "100%",
-									bgcolor: "background.paper",
-								}}>
-								{reviews.map((review) => (
-									<>
-										<ListItem alignItems='flex-start'>
-											<ListItemAvatar>
-												<Avatar alt='' src={review?.userPhoto} />
-											</ListItemAvatar>
-											<ListItemText
-												primary={review?.userName}
-												secondary={
-													<React.Fragment>
-														<Typography
-															sx={{ display: "inline" }}
-															component='span'
-															variant='body2'
-															color='text.primary'>
-															{review?.rating}{" "}
-															<StarIcon fontSize='5px' sx={{ mr: 1 }} />
-														</Typography>
-														{review?.review}
-													</React.Fragment>
-												}
-											/>
-										</ListItem>
-										<Divider variant='inset' component='li' />
-									</>
-								))}
-							</List>
+							{reviews.length > 0 ? (
+								<List
+									sx={{
+										width: "100%",
+										bgcolor: "background.paper",
+									}}>
+									{reviews.map((review) => (
+										<>
+											<ListItem alignItems='flex-start'>
+												<ListItemAvatar>
+													<Avatar alt='' src={review?.userPhoto} />
+												</ListItemAvatar>
+												<ListItemText
+													primary={review?.userName}
+													secondary={
+														<React.Fragment>
+															<Typography
+																sx={{ display: "inline" }}
+																component='span'
+																variant='body2'
+																color='text.primary'>
+																{review?.rating}{" "}
+																<StarIcon fontSize='5px' sx={{ mr: 1 }} />
+															</Typography>
+															{review?.review}
+														</React.Fragment>
+													}
+												/>
+											</ListItem>
+											<Divider variant='inset' component='li' />
+										</>
+									))}
+								</List>
+							) : (
+								<Typography
+									gutterBottom
+									variant='h6'
+									component='div'
+									sx={{ my: 2 }}>
+									No Reviews
+								</Typography>
+							)}
 						</Paper>
 					</Grid>
 				</Grid>

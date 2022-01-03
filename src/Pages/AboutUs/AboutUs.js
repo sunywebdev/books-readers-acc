@@ -11,7 +11,7 @@ const AboutUs = () => {
 			<Container sx={{ pt: 2, pb: 5 }}>
 				<Typography
 					className='textColor'
-					sx={{ fontWeight: 900, mb: 5 }}
+					sx={{ fontWeight: 900, mb: 2, color: "#02598b" }}
 					variant='h3'
 					component='div'
 					gutterBottom>

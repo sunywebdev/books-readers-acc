@@ -131,22 +131,22 @@ const Profile = () => {
 						<Typography
 							variant='h5'
 							component='div'
-							sx={{ fontWeight: "bold", mt: 2, color: "#31887D" }}>
+							sx={{ fontWeight: "bold", mt: 2, color: "#02598b" }}>
 							{singleUser?.displayName || user?.displayName}
 						</Typography>
 						<Typography
 							variant='body'
 							component='div'
-							sx={{ fontWeight: "bold", mt: 2, color: "#31887D" }}>
+							sx={{ fontWeight: "bold", mt: 2, color: "#02598b" }}>
 							{singleUser?.title || "Add Title"}
 						</Typography>
 						<List>
 							<ListItem sx={{ pt: 0 }}>
 								<ListItemIcon>
-									<EmailIcon sx={{ color: "#31887D" }} />
+									<EmailIcon sx={{ color: "#02598b" }} />
 								</ListItemIcon>
 								<ListItemText
-									sx={{ color: "#31887D" }}
+									sx={{ color: "#02598b" }}
 									primary={singleUser?.email || user?.email}
 								/>
 							</ListItem>
@@ -154,7 +154,7 @@ const Profile = () => {
 						<Typography
 							variant='subtitle'
 							component='div'
-							sx={{ color: "#31887D" }}>
+							sx={{ color: "#02598b" }}>
 							{singleUser?.details || "Add Details"}
 						</Typography>
 					</Card>

@@ -58,7 +58,7 @@ const AllUsers = () => {
 			<Grid>
 				<Typography
 					className='color-theme'
-					sx={{ mb: 3, fw: "bold" }}
+					sx={{ mb: 3, fw: "bold", color: "#02598b" }}
 					variant='h4'
 					component='div'
 					gutterBottom>

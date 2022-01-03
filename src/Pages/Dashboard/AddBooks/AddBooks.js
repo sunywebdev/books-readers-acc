@@ -86,7 +86,7 @@ const AddBooks = () => {
 		<Container>
 			<Typography
 				className='textColor'
-				sx={{ fontWeight: 900, mb: 3.5 }}
+				sx={{ fontWeight: 900, mb: 3.5, color: "#02598b" }}
 				variant='h4'
 				component='div'
 				gutterBottom>

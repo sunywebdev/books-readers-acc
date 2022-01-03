@@ -25,7 +25,7 @@ const Comments = () => {
 		<Container sx={{ pt: 5 }}>
 			<Typography
 				className='textColor'
-				sx={{ mb: 2, fontWeight: 900 }}
+				sx={{ mb: 2, fontWeight: 900, color: "#02598b" }}
 				variant='h4'
 				component='div'
 				gutterBottom>
