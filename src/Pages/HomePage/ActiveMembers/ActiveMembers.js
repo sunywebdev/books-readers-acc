@@ -1,4 +1,13 @@
-import { Card, CardMedia, Container, Grid, Typography } from "@mui/material";
+import {
+	Box,
+	Card,
+	CardMedia,
+	Container,
+	Grid,
+	Modal,
+	Typography,
+} from "@mui/material";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 const ActiveMembers = () => {
@@ -8,6 +17,29 @@ const ActiveMembers = () => {
 			.then((res) => res.json())
 			.then((data) => setUsers(data));
 	}, []);
+	const [open, setOpen] = React.useState(false);
+	const [singleUser, setSingleUser] = useState();
+	const handleOpen = async (email) => {
+		setOpen(true);
+		const data = await axios.get(
+			`${process.env.REACT_APP_SERVER_API}/singleUsers?email=${email}`,
+		);
+		setSingleUser(data.data);
+	};
+	console.log(singleUser);
+	const handleClose = () => setOpen(false);
+
+	const style = {
+		position: "absolute",
+		top: "50%",
+		left: "50%",
+		transform: "translate(-50%, -50%)",
+		width: 400,
+		bgcolor: "white",
+		border: "2px solid #000",
+		boxShadow: 24,
+		p: 4,
+	};
 	return (
 		<Container sx={{ py: 5 }}>
 			<Typography
@@ -22,8 +54,10 @@ const ActiveMembers = () => {
 				{users.map((user) => (
 					<Grid item md={2} sm={3} xs={6}>
 						<Card
+							onClick={() => handleOpen(user?.email)}
 							className='borderColor'
 							sx={{
+								cursor: "pointer",
 								py: 2,
 								display: "flex",
 								flexDirection: "column",
@@ -58,6 +92,66 @@ const ActiveMembers = () => {
 					</Grid>
 				))}
 			</Grid>
+			<Modal
+				open={open}
+				onClose={handleClose}
+				aria-labelledby='modal-modal-title'
+				aria-describedby='modal-modal-description'>
+				<Box sx={style}>
+					<Card
+						sx={{
+							px: 1.5,
+							mb: 1,
+							py: 2,
+							minHeight: "250px",
+							display: "flex",
+							flexDirection: "column",
+							alignItems: "center",
+							alignContent: "center",
+							overflow: "hidden",
+							boxShadow: "none",
+							textAlign: "center",
+						}}>
+						<CardMedia
+							component='img'
+							className='border'
+							style={{
+								width: "110px",
+								height: "110px",
+								borderRadius: "50%",
+								border: "1px solid",
+							}}
+							image={singleUser?.photoURL || "N/A"}
+							alt=''
+						/>
+						<Typography
+							variant='h5'
+							component='div'
+							sx={{ fontWeight: "bold", mt: 2, color: "#02598b" }}>
+							{singleUser?.displayName || "N/A"}
+						</Typography>
+						<Typography
+							variant='body'
+							component='div'
+							sx={{ fontWeight: "bold", mt: 2, color: "#02598b" }}>
+							{singleUser?.title || "Add Title"}
+						</Typography>
+						<Typography
+							variant='body1'
+							component='div'
+							sx={{ my: 2, color: "#02598b" }}>
+							{singleUser?.email || "N/A"}
+						</Typography>
+
+						<Typography
+							variant='subtitle'
+							component='div'
+							sx={{ color: "#02598b" }}>
+							{singleUser?.details || "N/A"}
+						</Typography>
+					</Card>
+				</Box>
+			</Modal>
 		</Container>
 	);
 };
