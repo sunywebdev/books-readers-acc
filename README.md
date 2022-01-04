@@ -3,15 +3,14 @@
 This is a website for Books Readers Associations. Thsi site live hosted <a href='http://books-readers-acc.netlify.app/'>here</a>
 
 Technology Used:
-For Front-end: React JS, MUI, Sweetalert2, React Hook Form, React Router, Swiper JS , etc.
-For Back-end: Node JS, Heroku.
-Database: MongoDB.
-Authorization: Google Firebase.
+For Front-end: React JS, MUI, Sweetalert2, React Hook Form, React Router, Swiper JS , etc. <br/>
+For Back-end: Node JS, Heroku.<br/>
+Database: MongoDB.<br/>
+Authorization: Google Firebase.<br/>
 
-Features:
+<h3>Features:</h3>
 
-As an Admin:
-
+<h4>As an Admin:</h4>
 <ul>
     <li>Add or remove books</li>
     <li>View all book list</li>
@@ -22,8 +21,7 @@ As an Admin:
     <li>View Own Profile</li>
 </ul/>
 
-As a user:
-
+<h4>As a user:</h4>
 <ul>
     <li>Read all books</li>
     <li>Post review about other books</li>
