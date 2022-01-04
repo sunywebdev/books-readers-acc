@@ -60,6 +60,12 @@ const useFirebase = () => {
 			})
 			.catch((error) => {
 				const errorMessage = error.message;
+				Swal.fire({
+					icon: "error",
+					title: errorMessage,
+					showConfirmButton: false,
+					timer: 2000,
+				});
 				setError(errorMessage);
 			})
 			.finally(() => setIsloading(false));
@@ -87,6 +93,12 @@ const useFirebase = () => {
 			})
 			.catch((error) => {
 				const errorMessage = error.message;
+				Swal.fire({
+					icon: "error",
+					title: errorMessage,
+					showConfirmButton: false,
+					timer: 2000,
+				});
 				setError(errorMessage);
 			})
 			.finally(() => setIsloading(false));
