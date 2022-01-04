@@ -64,7 +64,7 @@ const ActiveMembers = () => {
 								alignItems: "center",
 								alignContent: "center",
 								overflow: "visible",
-								border: "1px solid ",
+								border: "1px solid #02598b",
 								boxShadow: " 4px 24px 34px 1px rgba(0,0,0,0.16)",
 							}}>
 							<CardMedia
