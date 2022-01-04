@@ -124,7 +124,7 @@ const Footer = () => {
 				gutterBottom
 				component='div'
 				sx={{ textAlign: "center", py: 2, color: "#02598b" }}>
-				&copy; All Rights Reserved
+				&copy; 2022 All Rights Reserved
 			</Typography>
 		</>
 	);
