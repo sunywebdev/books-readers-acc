@@ -12,7 +12,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import Swal from "sweetalert2";
 import useAuth from "../../context/useAuth";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const AddReview = () => {
 	const { user } = useAuth();
