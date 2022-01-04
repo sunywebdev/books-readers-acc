@@ -12,11 +12,12 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import Swal from "sweetalert2";
 import useAuth from "../../context/useAuth";
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 
 const AddReview = () => {
 	const { user } = useAuth();
 	const location = useLocation();
+	const navigate = useNavigate();
 	const [singleUser, setSingleUser] = useState();
 	const { register, handleSubmit, reset } = useForm();
 	useEffect(() => {
@@ -52,7 +53,7 @@ const AddReview = () => {
 					setSubmitting(false);
 					reset();
 					const destination = location?.state?.from || "/";
-					Navigate(destination);
+					navigate(destination);
 				});
 			})
 			.catch(function (error) {
