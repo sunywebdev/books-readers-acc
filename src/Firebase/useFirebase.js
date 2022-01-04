@@ -76,7 +76,6 @@ const useFirebase = () => {
 		email,
 		password,
 		displayName,
-		photoURL,
 		navigate,
 		location,
 	) => {
@@ -84,12 +83,7 @@ const useFirebase = () => {
 		createUserWithEmailAndPassword(auth, email, password)
 			.then((res) => {
 				setUser(res.user);
-				updateProfile(auth.currentUser, {
-					displayName: displayName,
-					photoURL: photoURL,
-				});
-
-				saveUserToDb(email, displayName, photoURL, navigate, location);
+				saveUserToDb(email, displayName, navigate, location);
 			})
 			.catch((error) => {
 				const errorMessage = error.message;
@@ -124,6 +118,7 @@ const useFirebase = () => {
 					navigate(destination);
 				});
 			})
+
 			.catch((error) => {
 				const errorMessage = error.message;
 				Swal.fire({
@@ -137,9 +132,14 @@ const useFirebase = () => {
 			.finally(() => setIsloading(false));
 	};
 
-	const saveUserToDb = (email, displayName, photoURL, navigate, location) => {
+	const saveUserToDb = (email, displayName, navigate, location) => {
+		const save = {
+			email,
+			displayName,
+			photoURL: "https://books-readers-acc.netlify.app/user.png",
+		};
 		axios
-			.post(`${process.env.REACT_APP_SERVER_API}/users`, user)
+			.post(`${process.env.REACT_APP_SERVER_API}/users`, save)
 			.then(function (response) {
 				Swal.fire({
 					icon: "success",
@@ -168,8 +168,9 @@ const useFirebase = () => {
 		navigate,
 		location,
 	) => {
+		const save = { email, displayName, photoURL };
 		axios
-			.put(`${process.env.REACT_APP_SERVER_API}/users`, user)
+			.put(`${process.env.REACT_APP_SERVER_API}/users`, save)
 			.then(function (response) {
 				Swal.fire({
 					icon: "success",
