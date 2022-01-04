@@ -12,9 +12,11 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import Swal from "sweetalert2";
 import useAuth from "../../context/useAuth";
+import { Navigate, useLocation } from "react-router-dom";
 
 const AddReview = () => {
 	const { user } = useAuth();
+	const location = useLocation();
 	const [singleUser, setSingleUser] = useState();
 	const { register, handleSubmit, reset } = useForm();
 	useEffect(() => {
@@ -46,9 +48,12 @@ const AddReview = () => {
 					title: "Review Added Successfully",
 					showConfirmButton: true,
 					timer: 2500,
+				}).then(function () {
+					setSubmitting(false);
+					reset();
+					const destination = location?.state?.from || "/";
+					Navigate(destination);
 				});
-				setSubmitting(false);
-				reset();
 			})
 			.catch(function (error) {
 				console.log(error);

@@ -41,12 +41,13 @@ const SingleBook = () => {
 		setSubmitting(true);
 		const userReview = {
 			review,
-			rating,
+			rating: value,
 			bookId: book?.bookId,
 			userPhoto: singleUser?.photoURL,
 			userName: singleUser?.displayName,
 			userEmail: singleUser?.email,
 		};
+		console.log(userReview);
 		axios
 			.post(`${process.env.REACT_APP_SERVER_API}/reviews`, userReview)
 			.then(function (response) {
@@ -91,7 +92,7 @@ const SingleBook = () => {
 		fetch(`${process.env.REACT_APP_SERVER_API}/reviewss?bookId=${book?.bookId}`)
 			.then((res) => res.json())
 			.then((data) => setReviews(data));
-	}, [book?.bookId]);
+	}, [book?.bookId, submitting]);
 
 	return (
 		<>
