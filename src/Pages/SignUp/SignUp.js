@@ -102,7 +102,6 @@ export default function SignUp() {
 					</Button>
 					<Button
 						onClick={handleGoogleSignUp}
-						type='submit'
 						fullWidth
 						variant='contained'
 						sx={{

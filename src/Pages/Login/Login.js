@@ -91,7 +91,6 @@ export default function Login() {
 					</Button>
 					<Button
 						onClick={handleGoogleLogin}
-						type='submit'
 						fullWidth
 						variant='contained'
 						sx={{
