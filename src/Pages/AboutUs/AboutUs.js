@@ -8,7 +8,7 @@ const AboutUs = () => {
 	return (
 		<>
 			<Header />
-			<Container sx={{ pt: 2, pb: 5 }}>
+			<Container sx={{ pt: 2, pb: 3}}>
 				<Typography
 					className='textColor'
 					sx={{ fontWeight: 900, mb: 2, color: "#02598b" }}
@@ -27,37 +27,41 @@ const AboutUs = () => {
 						/>
 					</Grid>
 					<Grid item md={8} xs={12}>
+						<Typography variant='h5' sx={{ textAlign: "left" }}>
+							About Reading Group Choices:
+						</Typography>
+						<Typography variant='h6' sx={{ textAlign: "left" }}>
+							Reading Group Choices has been selecting discussible books for
+							reading groups since 1994.
+						</Typography>
 						<Typography variant='body2' sx={{ textAlign: "left" }}>
-							Lorem ipsum dolor sit amet consectetur adipisicing elit.
-							Aspernatur quidem quos, excepturi ratione voluptas necessitatibus
-							perferendis eius molestias, nesciunt laborum quia sed, delectus
-							perspiciatis illum laboriosam! Quaerat tenetur voluptatibus, nemo
-							quia facilis aspernatur fugiat commodi a temporibus velit. In eum
+							Reading Group Choices partners with publishers, independent
+							bookstores, public libraries, and authors to develop resources to
+							enhance the shared reading group experience.
+							<br />
+							We look forward to recommending titles that will inspire lively
+							discussions for many years to come!
 							<br />
 							<br />
-							voluptates quaerat fugit, est maiores sapiente! Ratione totam ea
-							ipsa laudantium ducimus. Eos veritatis perferendis alias quam
-							minus vero, et repudiandae officiis accusamus dolorem repellendus
-							tempora, iste laudantium iure? Mollitia quia quibusdam repellendus
-							minima architecto doloribus sapiente animi, dolor porro aut est
-							sunt enim minus. Exercitationem laboriosam repellendus
-							<br />
-							<br />
-							consequuntur velit nam dolorem ex, numquam repellat eveniet sequi
-							ipsa! Dolores doloribus quidem cupiditate ducimus? Quam dolor
-							fugit temporibus quidem tempore earum. Laboriosam non adipisci cum
-							exercitationem, neque tenetur modi tempore sit est ratione
-							quibusdam perspiciatis autem dignissimos nesciunt explicabo totam
-							quam impedit commodi quasi quae! Illo molestiae pariatur esse
-							natus distinctio magnam numquam repellendus, tenetur in eos
-							<br />
-							<br />
-							aliquam non molestias adipisci amet neque vitae, sapiente ipsam?
-							Natus, quo doloremque. Eum reprehenderit sunt vitae ducimus unde
-							obcaecati neque rerum dolore adipisci alias aut labore laudantium,
-							fugiat dolorum sint. Veritatis quasi dolorum voluptate non in
-							animi, reiciendis neque vitae distinctio at cum et ipsa quidem
-							explicabo omnis officiis optio aliquam error officia ut.
+							Given the busy lifestyles of today, another variation on the
+							traditional 'book club' is the book reading club. In such a club,
+							the group agrees on a specific book, and each week (or whatever
+							frequency), one person in the group reads the book out loud while
+							the rest of the group listens. The group can either allow
+							interruptions for comments and questions from the members at any
+							time, or agree to allow such input at chapter or section endings.
+							Such a club makes reading a shared experience and frees the busy
+							members from the "homework" of having read the book before coming
+							to the club. It also creates a lively environment for commenting
+							on the specifics of the books as it is read and can lead to very
+							enriching exchanges. A given book may continue for several
+							sittings, depending on the pace of reading, frequency of meetings,
+							and the extent of comments and discussion. Members can take turns
+							reading to share the reading responsibility. Another variation on
+							the concept could be jointly listening to an audio-book with
+							pauses for comments. Once a book is completed, members recommend
+							their choices of the new books and vote on which book to proceed
+							with next.
 						</Typography>
 					</Grid>
 				</Grid>

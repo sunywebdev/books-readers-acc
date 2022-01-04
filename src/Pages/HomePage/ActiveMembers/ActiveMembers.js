@@ -9,7 +9,7 @@ const ActiveMembers = () => {
 			.then((data) => setUsers(data));
 	}, []);
 	return (
-		<Container sx={{ pt: 5 }}>
+		<Container sx={{ py: 5 }}>
 			<Typography
 				className='textColor'
 				sx={{ fontWeight: 900, mb: 3.5, color: "#02598b" }}
@@ -31,6 +31,7 @@ const ActiveMembers = () => {
 								alignContent: "center",
 								overflow: "visible",
 								border: "1px solid ",
+								boxShadow: " 4px 24px 34px 1px rgba(0,0,0,0.16)",
 							}}>
 							<CardMedia
 								component='img'
@@ -50,7 +51,7 @@ const ActiveMembers = () => {
 								variant='button'
 								component='div'
 								className='textColor'
-								sx={{ mt: 1.5, fontWeight: "bold" }}>
+								sx={{ mt: 1.5, fontWeight: "bold", color: "#02598b" }}>
 								{user?.displayName}
 							</Typography>
 						</Card>

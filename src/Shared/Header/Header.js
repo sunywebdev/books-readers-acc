@@ -21,7 +21,10 @@ const Header = () => {
 	return (
 		<Box sx={{ flexGrow: 1 }}>
 			<AppBar position='static'>
-				<Toolbar sx={{ backgroundColor: "#333333" }}>
+				<Toolbar
+					sx={{
+						backgroundColor: "#333333",
+					}}>
 					<Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
 						Books Readers Associations
 					</Typography>
@@ -48,6 +51,11 @@ const Header = () => {
 						onClose={handleClose}
 						MenuListProps={{
 							"aria-labelledby": "basic-button",
+						}}
+						sx={{
+							"& .MuiMenuItem-root,.MuiMenuItem-root a": {
+								color: "#02598b",
+							},
 						}}>
 						<MenuItem onClick={handleClose}>
 							<Link to='/' style={{ textDecoration: "none" }}>

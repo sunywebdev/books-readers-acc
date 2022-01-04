@@ -47,7 +47,6 @@ const AllBooksList = () => {
 			}
 		});
 	};
-	console.log(books);
 	let count = 1;
 	return (
 		<Container

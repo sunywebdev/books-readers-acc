@@ -53,7 +53,6 @@ const AddReview = () => {
 			.catch(function (error) {
 				console.log(error);
 			});
-		console.log(userReview);
 		reset();
 	};
 
@@ -68,7 +67,7 @@ const AddReview = () => {
 				sx={{ minHeight: { md: "100vh", xs: "90vh" } }}>
 				<Typography
 					className='textColor'
-					sx={{ mb: 4, fontWeight: 900 }}
+					sx={{ mb: 4, fontWeight: 900, color: "#02598b" }}
 					variant='h3'
 					component='div'
 					gutterBottom

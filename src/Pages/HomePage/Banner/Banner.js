@@ -24,14 +24,14 @@ const Banner = () => {
 						variant='h3'
 						component='div'
 						sx={{ fontWeight: "bold", mb: 3, color: "#02598b" }}>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem,
-						ducimus.
+						Books Readers Associations
 					</Typography>
 					<Typography variant='body1' component='div' sx={{ color: "#02598b" }}>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero,
-						aperiam provident. Possimus nostrum obcaecati delectus repellat,
-						placeat soluta nulla velit molestiae, odit dolores illum ipsum sed
-						est eius maxime quo.
+						Welcome to the Books Readers Associations, a book discussion group!
+						Join us here to celebrate the love of reading, access exclusive
+						content from many of the world's greatest authors, engage in
+						discussions with members about books, share book suggestions and
+						much more.
 					</Typography>
 					<Link
 						style={{ textDecoration: "none", color: "black" }}

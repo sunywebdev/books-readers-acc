@@ -61,9 +61,8 @@ const ContactUs = () => {
 							sx={{ fontWeight: 900, mb: 2 }}
 							variant='subtitle'
 							component='div'>
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui
-							sequi, doloremque officiis temporibus reiciendis vel sunt natus
-							ipsa sed a.
+							If you wish to be contacted by other means, please add your
+							contact preference and details to your question.
 						</Typography>
 						<form onSubmit={handleSubmit(onSubmit)} method='post'>
 							<Grid container spacing={2}>

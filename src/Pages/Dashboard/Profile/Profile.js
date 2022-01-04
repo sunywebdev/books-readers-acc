@@ -6,10 +6,6 @@ import {
 	Container,
 	Grid,
 	IconButton,
-	List,
-	ListItem,
-	ListItemIcon,
-	ListItemText,
 	TextField,
 	Typography,
 } from "@mui/material";
@@ -18,7 +14,6 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Swal from "sweetalert2";
-import EmailIcon from "@mui/icons-material/Email";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import { styled } from "@mui/material/styles";
 import Modal from "@mui/material/Modal";
@@ -107,7 +102,7 @@ const Profile = () => {
 						sx={{
 							px: 1.5,
 							mb: 1,
-							pb: 2,
+							py: 2,
 							minHeight: "250px",
 							display: "flex",
 							flexDirection: "column",
@@ -127,7 +122,6 @@ const Profile = () => {
 							image={singleUser?.photoURL || user?.photoURL}
 							alt=''
 						/>
-
 						<Typography
 							variant='h5'
 							component='div'
@@ -140,17 +134,13 @@ const Profile = () => {
 							sx={{ fontWeight: "bold", mt: 2, color: "#02598b" }}>
 							{singleUser?.title || "Add Title"}
 						</Typography>
-						<List>
-							<ListItem sx={{ pt: 0 }}>
-								<ListItemIcon>
-									<EmailIcon sx={{ color: "#02598b" }} />
-								</ListItemIcon>
-								<ListItemText
-									sx={{ color: "#02598b" }}
-									primary={singleUser?.email || user?.email}
-								/>
-							</ListItem>
-						</List>
+						<Typography
+							variant='body1'
+							component='div'
+							sx={{ my: 2, color: "#02598b" }}>
+							{singleUser?.email || user?.email}
+						</Typography>
+
 						<Typography
 							variant='subtitle'
 							component='div'

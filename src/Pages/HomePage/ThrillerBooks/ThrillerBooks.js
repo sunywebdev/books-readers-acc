@@ -17,7 +17,7 @@ const Books = () => {
 	}, []);
 
 	return (
-		<Container sx={{ pt: 5 }}>
+		<Container sx={{ py: 5 }}>
 			<Typography
 				className='textColor'
 				sx={{ fontWeight: 900, mb: 3.5, color: "#02598b" }}

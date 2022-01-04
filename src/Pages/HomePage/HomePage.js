@@ -7,17 +7,24 @@ import ThrillerBooks from "./ThrillerBooks/ThrillerBooks";
 import Books from "./Books/Books";
 import Comments from "./Comments/Comments";
 import HorrorBooks from "./HorrorBooks/HorrorBooks";
+import { Divider } from "@mui/material";
 
 const HomePage = () => {
 	return (
 		<div>
 			<Header />
 			<Banner />
+			<Divider />
 			<Books />
+			<Divider />
 			<ThrillerBooks />
+			<Divider />
 			<HorrorBooks />
+			<Divider />
 			<ActiveMembers />
+			<Divider />
 			<Comments />
+			<Divider />
 			<Footer />
 		</div>
 	);

@@ -20,9 +20,8 @@ const Comments = () => {
 			.then((res) => res.json())
 			.then((data) => setReviews(data));
 	}, [bookId]);
-	console.log(reviews);
 	return (
-		<Container sx={{ pt: 5 }}>
+		<Container sx={{ py: 5 }}>
 			<Typography
 				className='textColor'
 				sx={{ mb: 2, fontWeight: 900, color: "#02598b" }}

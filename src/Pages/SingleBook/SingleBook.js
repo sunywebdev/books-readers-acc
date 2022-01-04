@@ -62,7 +62,6 @@ const SingleBook = () => {
 			.catch(function (error) {
 				console.log(error);
 			});
-		console.log(userReview);
 		reset();
 	};
 
@@ -93,7 +92,6 @@ const SingleBook = () => {
 			.then((res) => res.json())
 			.then((data) => setReviews(data));
 	}, [book?.bookId]);
-	console.log(reviews);
 
 	return (
 		<>
