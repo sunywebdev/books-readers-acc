@@ -23,7 +23,7 @@ const Header = () => {
 			<AppBar position='static'>
 				<Toolbar
 					sx={{
-						backgroundColor: "#666666",
+						backgroundColor: "#333333",
 					}}>
 					<Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
 						Books Readers Associations
